@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+    <springProfile name="local, default">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{MMM dd HH:mm:ss} %-5p [%t] %X{AppData} %cn \(%F:%L\) - %class{0}:%method: %message%n</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <springProfile name="dev, qa">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{MMM dd HH:mm:ss} %-5p [%t] %X{AppData} %cn \(%F:%L\) - %class{0}:%method:%message%n</pattern>
+                <!-- pattern>%date{MMM dd HH:mm:ss} [%thread] %-5level %class{26} - %class{0}:%method: %message%n</pattern -->
+            </encoder>
+        </appender>
+    </springProfile>
+
+
+    <springProfile name="dev, qa">
+        <logger name="*" level="DEBUG"/>
+        <logger name="net.idt.debit" level="WARN"/>
+        <logger name="com.zaxxer.hikari" level="WARN"/>
+        <logger name="com.hazelcast" level="WARN"/>
+        <logger name="javax.activation" level="WARN"/>
+        <logger name="ch.qos.logback" level="WARN"/>
+        <logger name="com.sun" level="WARN"/>
+        <logger name="org.apache" level="WARN"/>
+        <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
+        <logger name="org.springframework" level="WARN"/>
+        <logger name="org.xnio" level="WARN"/>
+        <logger name="liquibase" level="WARN"/>
+        <logger name="sun.rmi" level="WARN"/>
+        <logger name="io.lettuce.core" level="WARN"/>
+    </springProfile>
+
+    <springProfile name="local, default">
+        <logger name="*" level="DEBUG"/>
+        <logger name="net.idt.debit" level="DEBUG"/>
+        <logger name="com.zaxxer.hikari" level="WARN"/>
+        <logger name="com.hazelcast" level="WARN"/>
+        <logger name="ch.qos.logback" level="INFO"/>
+        <logger name="com.sun" level="INFO"/>
+        <logger name="org.apache" level="INFO"/>
+        <logger name="org.apache.catalina.startup.DigesterFactory" level="INFO"/>
+        <logger name="org.springframework" level="INFO"/>
+        <logger name="org.xnio" level="INFO"/>
+        <logger name="sun.rmi" level="INFO"/>
+        <logger name="liquibase" level="INFO"/>
+        <logger name="sun.rmi.transport" level="INFO"/>
+        <logger name="org.hibernate" level="INFO"/>
+        <logger name="io.lettuce.core" level="WARN"/>
+    </springProfile>
+
+    <springProfile name="prod">
+        <logger name="*" level="WARN"/>
+        <logger name="net.idt.debit" level="PROFILE"/>
+        <logger name="com.zaxxer.hikari" level="WARN"/>
+        <logger name="com.hazelcast" level="WARN"/>
+        <logger name="javax.activation" level="WARN"/>
+        <logger name="ch.qos.logback" level="WARN"/>
+        <logger name="org.apache" level="WARN"/>
+        <logger name="org.apache.catalina.startup.DigesterFactory" level="WARN"/>
+        <logger name="org.springframework" level="WARN"/>
+        <logger name="org.xnio" level="WARN"/>
+        <logger name="sun.rmi" level="WARN"/>
+        <logger name="liquibase" level="WARN"/>
+        <logger name="sun.rmi.transport" level="WARN"/>
+        <logger name="io.lettuce.core" level="WARN"/>
+    </springProfile>
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <root>
+        <springProfile name="local, default">
+            <level value="DEBUG"/>
+            <appender-ref ref="STDOUT"/>
+        </springProfile>
+        <springProfile name="dev, qa">
+            <level value="INFO"/>
+            <appender-ref ref="STDOUT"/>
+        </springProfile>
+        <springProfile name="prod">
+            <level value="INFO"/>
+            <appender-ref ref="STDOUT"/>
+        </springProfile>
+    </root>
+
+</configuration>
+
