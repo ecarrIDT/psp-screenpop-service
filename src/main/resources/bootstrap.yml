@@ -1,0 +1,88 @@
+spring:
+  application:
+    name: psp-screenpop-service
+  cloud:
+    vault:
+      enabled: false
+  data:
+    redis:
+      repositories:
+        enabled: false
+  redis:
+    host: 10.252.151.116
+    port: 8379
+    password: tc-redis-2019
+    ssl: false
+    timeout: 50ms
+    lettuce:
+      pool:
+        max-idle: 5
+        max-active: 20
+        max-wait: 10ms
+
+cors:
+  allowed-origins: "*"
+  allowed-methods: GET, PUT, DELETE
+  allow-credentials: false
+  allowed-headers: "*"
+
+management:
+  endpoints:
+    web:
+      base-path: '/'
+      exposure.include: 'about, help, health'
+
+calldata:
+  ttl: 60s 
+
+##---
+## TODO:  we want to use encrypted password
+## see how to use annotation here:
+##    https://stackoverflow.com/questions/34201135/spring-redis-read-configuration-from-application-properties-file
+## and
+##    https://github.com/matheustardivo/spring-redis-cache/blob/master/src/main/java/net/tardivo/spring/redis/cache/SpringConfiguration.java
+##    https://github.com/matheustardivo/spring-redis-cache/blob/master/src/main/resources/redis.properties
+#
+#spring:
+#  profiles: redis
+#  redis:
+#    #host: redis-17689.c10.us-east-1-2.ec2.cloud.redislabs.com:17689 
+#    #port: 17689 
+#    host: 10.252.151.116
+#    port: 8379
+#    password: tc-redis-2019
+#    ssl: false
+#    timeout: 500ms
+#    lettuce:
+#      pool:
+#        max-idle: 5
+#        max-active: 20
+#        max-wait: 10ms
+
+---
+spring:
+  profiles: vault
+  cloud:
+    vault:
+      host: https://vault.awsdev.idt.net 
+      port: 8200
+      scheme: https
+      connection-timeout: 5000
+      read-timeout: 15000
+      authentication: TOKEN
+      token: 00000000-0000-0000-0000-000000000000
+      fail-fast: true
+      kv:
+        backend-version: 2
+
+
+# from https://cloud.spring.io/spring-cloud-vault/multi/multi_vault.config.backends.html
+# pring.cloud.vault:
+#     kv:
+#         enabled: true
+#         backend: secret
+#         profile-separator: '/'
+#         default-context: application
+#         application-name: my-app
+
+

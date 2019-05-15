@@ -1,0 +1,7 @@
+# MOOSE, TODO, need to fix below
+info.help.confluence: https://idtjira.atlassian.net/wiki/spaces/TEAM/pages/77546592/Admin+Customer+Service+Applications+Team
+info.enableSwagger: true
+
+info.about.scrum-team: ADMCSA
+info.about.slack-channel: #scrum_team_admcsa
+info.about.git: https://github.com/coretech/psp-screenpop-service
