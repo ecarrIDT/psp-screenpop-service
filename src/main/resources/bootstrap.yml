@@ -9,11 +9,11 @@ spring:
       repositories:
         enabled: false
   redis:
-    host: 10.252.151.116
-    port: 8379
-    password: tc-redis-2019
+    host: redis-17689.c10.us-east-1-2.ec2.cloud.redislabs.com
+    port: 17689
+    password: Encrypted-Password
     ssl: false
-    timeout: 50ms
+    timeout: 80ms
     lettuce:
       pool:
         max-idle: 5
@@ -33,7 +33,7 @@ management:
       exposure.include: 'about, help, health'
 
 calldata:
-  ttl: 60s 
+  ttl: 60s
 
 ##---
 ## TODO:  we want to use encrypted password
@@ -42,29 +42,13 @@ calldata:
 ## and
 ##    https://github.com/matheustardivo/spring-redis-cache/blob/master/src/main/java/net/tardivo/spring/redis/cache/SpringConfiguration.java
 ##    https://github.com/matheustardivo/spring-redis-cache/blob/master/src/main/resources/redis.properties
-#
-#spring:
-#  profiles: redis
-#  redis:
-#    #host: redis-17689.c10.us-east-1-2.ec2.cloud.redislabs.com:17689 
-#    #port: 17689 
-#    host: 10.252.151.116
-#    port: 8379
-#    password: tc-redis-2019
-#    ssl: false
-#    timeout: 500ms
-#    lettuce:
-#      pool:
-#        max-idle: 5
-#        max-active: 20
-#        max-wait: 10ms
 
 ---
 spring:
   profiles: vault
   cloud:
     vault:
-      host: https://vault.awsdev.idt.net 
+      host: https://vault.awsdev.idt.net
       port: 8200
       scheme: https
       connection-timeout: 5000
