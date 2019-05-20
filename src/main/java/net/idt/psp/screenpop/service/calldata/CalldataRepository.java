@@ -7,7 +7,6 @@ import net.idt.psp.screenpop.service.calldata.StringCrudRepository;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Repository;
 //import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Slf4j
-@Profile("!stub")
 @RequiredArgsConstructor
 public class CalldataRepository implements StringCrudRepository {
 
