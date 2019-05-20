@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StringCrudRepository {
     // save a record with a ttl (time-to-live)
-    public void saveByKey (String key, String value, Duration ttl); 
+    public void saveOrUpdate (String key, String value, Duration ttl); 
 
     // delete a record by key
     public String findByKey (String key);

@@ -7,15 +7,22 @@ import net.idt.psp.screenpop.service.calldata.StringCrudRepository;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Repository;
 //import org.springframework.transaction.annotation.Transactional;
 
-// Modeled after the UserDAO.java example in 
+
+// profile usage is modeled based one:
+// https://www.baeldung.com/spring-profiles video
+// https://www.mkyong.com/spring/spring-profiles-example/ 
+
+// stringRedisTemplate usage is modedled after the UserDAO.java example in 
 // https://www.concretepage.com/spring-4/spring-data-redis-example
 
 @Repository
 @Slf4j
+@Profile("!stub")
 @RequiredArgsConstructor
 public class CalldataRepository implements StringCrudRepository {
 
@@ -33,13 +40,13 @@ public class CalldataRepository implements StringCrudRepository {
     }
 
     /**
-     * Create a new (or overwrite an existing) string-based calldata by key. 
+     * Create a new (or overwrite an existing) string-based calldata with/by a key. 
      * @param key
      * @param calldata 
      * @param ttl time to live
      */
     @Override
-    public void saveByKey (String key, String calldata, Duration ttl) {
+    public void saveOrUpdate (String key, String calldata, Duration ttl) {
         stringRedisTemplate.opsForValue().set (key, calldata, ttl);
     }
 
