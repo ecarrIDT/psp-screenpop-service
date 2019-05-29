@@ -50,6 +50,14 @@
             <optional>true</optional>
         </dependency>
 
+	<!-- Specific RequestMapping annotation -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>4.3.6.RELEASE</version>
+        </dependency>
+
+
 <!-- MOOSE cleanup if not needed
         <dependency>
             <groupId>org.springframework.cloud</groupId>
